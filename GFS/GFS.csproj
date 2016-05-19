@@ -181,7 +181,6 @@
     <Compile Include="Controllers\StockFilesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Domain\Data.cs" />
-    <Compile Include="Domain\Operation.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
