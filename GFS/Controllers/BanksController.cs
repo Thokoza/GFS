@@ -20,7 +20,7 @@ namespace GFS.Controllers
             return View(db.Banks.ToList());
         }
 
-        public string testing()
+        public string testing1()
         {
             return null;
         }
