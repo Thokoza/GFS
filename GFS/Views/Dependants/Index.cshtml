@@ -6,6 +6,19 @@
 }
 
 <h2>Dependants</h2>
+<div align="right">
+    <table>
+        <tr>
+            @using (Html.BeginForm())
+            {
+                <td>Find by Policy Number: </td>
+                <td>@Html.TextBox("SearchString")</td>
+                <td><input type="submit" value="Search" class="btn btn-primary"></td>
+            }
+        </tr>
+    </table>
+</div>
+
 
 <table class="table table-bordered table-responsive">
     <tr>

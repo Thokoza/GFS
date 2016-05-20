@@ -10,8 +10,12 @@
 <table class="table table-bordered table-responsive">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.policyNo)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.firstName)
         </th>
+
         <th>
             @Html.DisplayNameFor(model => model.lastName)
         </th>
@@ -22,23 +26,25 @@
             @Html.DisplayNameFor(model => model.age)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.gender)
+            @Html.DisplayNameFor(model => model.causeOfDeath)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.causeOfDeath)
+            @Html.DisplayNameFor(model => model.placeofdeath)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DateOfDeath)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.policyNo)
-        </th>
+
+        <th>Total Files</th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.policyNo)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.firstName)
             </td>
@@ -52,23 +58,59 @@
                 @Html.DisplayFor(modelItem => item.age)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.gender)
+                @Html.DisplayFor(modelItem => item.causeOfDeath)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.causeOfDeath)
+                @Html.DisplayFor(modelItem => item.placeofdeath)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateOfDeath)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.policyNo)
+                @if (item.FileDetails.Count() == 0)
+                {
+                    <span>No File</span>
+                }
+                else
+                {
+                    <span>@item.FileDetails.Count() File(s)</span>
+                }
             </td>
+
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.deceasedNo }) |
                 @Html.ActionLink("Details", "Details", new { id = item.deceasedNo }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.deceasedNo })
+                <a href="javascript:void(0);" data-id="@item.deceasedNo" class="deleteItem">Delete</a>
             </td>
         </tr>
     }
 
 </table>
+
+@section Scripts {
+
+    <script>
+            $('.deleteItem').click(function (e) {
+                e.preventDefault();
+                var $ctrl = $(this);
+                if (confirm('Do you really want to delete this item?')) {
+                    $.ajax({
+                        url: '@Url.Action("Delete")',
+                        type: 'POST',
+                        data: { id: $(this).data('id') }
+                    }).done(function (data) {
+                        if (data.Result == "OK") {
+                            $ctrl.closest('tr').remove();
+                        }
+                        else if (data.Result.Message) {
+                            alert(data.Result.Message);
+                        }
+                    }).fail(function () {
+                        alert("There is something wrong. Please try again.");
+                    })
+
+                }
+            });
+    </script>
+}

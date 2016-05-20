@@ -16,12 +16,28 @@ namespace GFS.Controllers.Policies
         private GFSContext db = new GFSContext();
 
         // GET: Dependants
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            var dependants = db.Dependants.Include(b => b.NewMembers);
-            return View(dependants.ToList());
-        }
+            var dependants = from m in db.Dependants
+                             select m;
 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                dependants = dependants.Where(s => s.policyNo.Contains(searchString));
+
+                Dependant d = db.Dependants.ToList().Find(r => r.policyNo == searchString);
+
+                Session["First Name"] = d.fName;
+                Session["Last Name"] = d.lName;
+                Session["ID Number"] = d.IdNo;
+                Session["Age"] = d.age;
+                Session["PolicyNo"] = d.policyNo;
+
+                RedirectToAction("Create", "Deceaseds");
+            }
+            return View(dependants);
+
+        }
         // GET: Dependants/Details/5
         public ActionResult Details(int? id)
         {

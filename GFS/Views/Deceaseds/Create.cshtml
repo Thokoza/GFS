@@ -5,60 +5,75 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Declare As Deceased</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Deceaseds", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+    @Html.ValidationSummary(true)
+
+
     <div class="form-horizontal">
-        <h4>Deceased</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.policyNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Session["PolicyNo"].ToString()
+            </div>
+        </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.firstName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-3">
+            <div class="col-md-10">
                 @Session["First Name"].ToString()
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.lastName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-3">
+            <div class="col-md-10">
                 @Session["Last Name"].ToString()
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.idNo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-3">
+            <div class="col-md-10">
                 @Session["ID Number"].ToString()
+
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.age, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-3">
+            <div class="col-md-10">
                 @Session["Age"].ToString()
+
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-3">
-                @Session["Gender"].ToString()
-            </div>
-        </div>
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Session["Gender"].ToString()
+
+                </div>
+            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.causeOfDeath, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-3">
-                @Html.EditorFor(model => model.causeOfDeath, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.causeOfDeath, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.causeOfDeath, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.placeofdeath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                @Html.TextAreaFor(model => model.placeofdeath, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.placeofdeath, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.DateOfDeath, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-3">
@@ -67,19 +82,23 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.policyNo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-3">
-                @Session["PolicyNo"].ToString()
-            </div>
+        <div class="editor-label">
+            <label>Upload Deceased Verification Documents:</label>
+        </div>
+        <div class="editor-field">
+            <input type="file" name="file" multiple="multiple" />
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save Deceased" class="btn btn-success" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
+    if (Session["Response"] != null)
+    {
+        <script>alert(@Session["Response"].ToString())</script>
+    }
 }
 
 <div>
@@ -87,5 +106,6 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 }

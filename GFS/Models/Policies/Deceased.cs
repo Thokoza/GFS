@@ -34,8 +34,8 @@ namespace GFS.Models.Policies
         public int age { get; set; }
 
         [Required]
-        [DisplayName("Gender:")]
-        public string gender { get; set; }
+        [DisplayName("Place of Death")]
+        public string placeofdeath { get; set; }
 
         [Required]
         [DisplayName("Cause Of Death:")]
@@ -48,7 +48,8 @@ namespace GFS.Models.Policies
         public DateTime DateOfDeath { get; set; }
 
         [DisplayName("Policy No:")]
-        public int policyNo { get; set; }
+        public string policyNo { get; set; }
         public virtual ICollection<NewMember> NewMembers { get; set; }
+       public virtual ICollection<FileDetail> FileDetails { get; set; }
     }
 }

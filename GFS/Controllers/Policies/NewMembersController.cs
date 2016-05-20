@@ -31,7 +31,6 @@ namespace GFS.Controllers.Policies
                 Session["Last Name"] = d.lName;
                 Session["ID Number"] = d.IdNo;
                 Session["Age"] = d.age;
-                Session["Gender"] = d.gender;
                 Session["PolicyNo"] = d.policyNo;
 
                 RedirectToAction("Create", "Deceaseds");

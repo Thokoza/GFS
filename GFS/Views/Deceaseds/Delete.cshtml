@@ -45,11 +45,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.gender)
+            @Html.DisplayNameFor(model => model.placeofdeath)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.gender)
+            @Html.DisplayFor(model => model.placeofdeath)
         </dd>
 
         <dt>
@@ -78,7 +78,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

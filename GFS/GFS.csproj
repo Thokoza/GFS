@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -200,6 +201,7 @@
     <Compile Include="Models\Policies\DebitOrderAuthorization.cs" />
     <Compile Include="Models\Policies\Deceased.cs" />
     <Compile Include="Models\Policies\Dependant.cs" />
+    <Compile Include="Models\Policies\FileDetail.cs" />
     <Compile Include="Models\Policies\NewMember.cs" />
     <Compile Include="Models\Policies\Payer.cs" />
     <Compile Include="Models\PolicyPlan.cs" />
@@ -1094,7 +1096,7 @@
     <Content Include="Views\Payments\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Upload\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>

@@ -42,6 +42,7 @@ namespace GFS.Models
         public System.Data.Entity.DbSet<GFS.Models.Policies.ArchivedMember> ArchivedMembers { get; set; }
 
         public System.Data.Entity.DbSet<GFS.Models.Policies.Deceased> Deceaseds { get; set; }
+        public System.Data.Entity.DbSet<GFS.Models.Policies.FileDetail> FileDetails { get; set; }
 
         public System.Data.Entity.DbSet<GFS.Models.StockFile> StockFiles { get; set; }
 
